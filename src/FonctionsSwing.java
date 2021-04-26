@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class FonctionsSwing {
+public class FonctionsSwing extends JFrame{
     public JRadioButton RadioButton(String text, int x, int y, int width){
         JRadioButton radioButton=new JRadioButton(text);
         radioButton.setBounds(x,y,width,30);

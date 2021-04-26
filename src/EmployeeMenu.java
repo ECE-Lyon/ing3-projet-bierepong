@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class EmployeeMenu extends JFrame{
+public class EmployeeMenu extends FonctionsSwing{
     public EmployeeMenu(){
-        setTitle("Menu");
+        setTitle("Menu employés");
         Container contentPane=this.getContentPane();
         contentPane.setLayout(null);
         JButton update=Button("Mettre à jour les films disponibles",120,30,250,30);
@@ -13,13 +13,6 @@ public class EmployeeMenu extends JFrame{
         contentPane.add(update);contentPane.add(discounts);contentPane.add(records);contentPane.add(famous);
         setSize(500,300);
         setVisible(true);
-    }
-
-
-    public JButton Button(String text,int x,int y,int width,int height){
-        JButton button=new JButton(text);
-        button.setBounds(x, y, width, height);
-        return button;
     }
 
     public static void main(String[] args) {
