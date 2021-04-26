@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class EmployeeMenu extends FonctionsSwing{
-    public EmployeeMenu(){
+public class MenuEmployee extends FonctionsSwing{
+    public MenuEmployee(){
         setTitle("Menu employés");
         Container contentPane=this.getContentPane();
         contentPane.setLayout(null);
@@ -16,6 +16,6 @@ public class EmployeeMenu extends FonctionsSwing{
     }
 
     public static void main(String[] args) {
-        new EmployeeMenu();
+        new MenuEmployee();
     }
 }

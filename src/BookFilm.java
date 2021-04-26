@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Validation extends FonctionsSwing{
-    public Validation (){
+public class BookFilm extends FonctionsSwing{
+    public BookFilm (){
         setTitle("Validation");
         Container contentPane=this.getContentPane();
         contentPane.setLayout(null);
@@ -29,7 +29,7 @@ public class Validation extends FonctionsSwing{
     }
 
     public static void main(String[]args){
-        new Validation();
+        new BookFilm();
     }
 
 }
