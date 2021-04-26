@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Validation extends JFrame {
+public class Validation extends JFrame{
     public Validation (){
         setTitle("Validation");
         Container contentPane=this.getContentPane();
