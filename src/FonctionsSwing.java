@@ -13,6 +13,7 @@ public class FonctionsSwing extends JFrame{
     }
     public JTextField ChampText(String text,int x,int y,int width,int height){
         JTextField textField=new JTextField(text);
+        textField.setEditable(false);
         textField.setBounds(x,y,width,height);
         return textField;
     }
