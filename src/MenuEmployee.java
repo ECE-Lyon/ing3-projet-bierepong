@@ -4,13 +4,15 @@ import java.awt.*;
 public class MenuEmployee extends FonctionsSwing{
     public MenuEmployee(){
         setTitle("Menu employés");
-        Container contentPane=this.getContentPane();
-        contentPane.setLayout(null);
-        JButton update=Button("Mettre à jour les films disponibles",120,30,250,30);
-        JButton discounts=Button("Rajouter des offres de réductions",120,70,250,30);
-        JButton records=Button("Mettre à jour les données clients",120,110,250,30);
-        JButton famous=Button("Revoir les films populaires",120,150,250,30);
-        contentPane.add(update);contentPane.add(discounts);contentPane.add(records);contentPane.add(famous);
+        GridLayout grid = new GridLayout(5, 1);
+        grid.setVgap(3);
+        setLayout(grid);
+        JButton update=new JButton("Mettre à jour les films disponibles");
+        JButton discounts=new JButton("Rajouter des offres de réductions");//S'en occuper plus tard
+        JButton records=new JButton("Mettre à jour les données clients");
+        JButton famous=new JButton("Voir les statistiques");
+        JButton commandes=new JButton("Modifier les commandes");
+        add(update);add(discounts);add(records);add(famous);add(commandes);
         setSize(500,300);
         setVisible(true);
     }
