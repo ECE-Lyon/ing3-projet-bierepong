@@ -130,17 +130,10 @@ public class MenuModif extends JFrame{
 
         Film film_3 = new Film();
         film_3.setGenre("Commédie");
-        film_3.setReleaseDate("15 Janvier 2004");
-        film_3.setTitle("Shrek");
-        film_3.setRunningTime(106);
-        film_3.setImage("Images/ShrekPNG.png");
-
-        Film film_4 = new Film();
-        film_4.setGenre("Horreur");
-        film_4.setReleaseDate("30 Mars 1998");
-        film_4.setTitle("Picsou et l'attaque des nains");
-        film_4.setRunningTime(95);
-        film_4.setImage("Images/Shrek.jpg");
+        film_3.setReleaseDate("17 Juillet 2123");
+        film_3.setTitle("Monstre&Co");
+        film_3.setRunningTime(132);
+        film_3.setImage("Images/MontreAndCoCursed.png");
 
         Film film_5 = new Film();
         film_5.setGenre("Commédie");
@@ -157,7 +150,7 @@ public class MenuModif extends JFrame{
         film_6.setImage("Images/Shrek.jpg");
 
 
-        Film Lib[] = {film_1, film_2, film_3, film_4, film_5,film_6};
+        Film Lib[] = {film_1, film_2, film_3, film_5,film_6};
 
         MenuModif menu = new MenuModif();
         menu.ModifFilm(Lib);
