@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuEmployee extends FonctionsSwing{
+public class MenuEmployee extends JFrame{
     public MenuEmployee(){
         setTitle("Menu employés");
         GridLayout grid = new GridLayout(5, 1);
@@ -10,9 +10,9 @@ public class MenuEmployee extends FonctionsSwing{
         JButton update=new JButton("Mettre à jour les films disponibles");
         JButton discounts=new JButton("Rajouter des offres de réductions");//S'en occuper plus tard
         JButton records=new JButton("Mettre à jour les données clients");
-        JButton famous=new JButton("Voir les statistiques");
-        JButton commandes=new JButton("Modifier les commandes");
-        add(update);add(discounts);add(records);add(famous);add(commandes);
+        JButton stat=new JButton("Voir les statistiques");
+        JButton resa=new JButton("Modifier les commandes");
+        add(update);add(discounts);add(records);add(stat);add(resa);
         setSize(500,300);
         setVisible(true);
     }

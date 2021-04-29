@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class FilmWindow extends FonctionsSwing{
+public class FilmWindow extends JFrame{
     public FilmWindow () throws IOException {
         Film film_1 = new Film();
         film_1.setGenre("Commédie");

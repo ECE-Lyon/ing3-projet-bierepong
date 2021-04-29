@@ -12,6 +12,11 @@ public class Film {
     public int runningTime;
     public String genre;
     public String image;
+    public int nbDeVente;
+
+    public Film(){
+        nbDeVente = 0;
+    }
 
     public String getTitle(){
         return title;
@@ -48,6 +53,12 @@ public class Film {
         this.image = image;
     }
 
+    public int getNbDeVente(){
+        return nbDeVente;
+    }
+    public void setNbDeVente(int nbDeVente){
+        this.nbDeVente = nbDeVente;
+    }
 
     public static JTextArea TextAreaBis(String text){
         JTextArea txt=new JTextArea(text);
