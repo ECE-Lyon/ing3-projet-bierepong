@@ -1,3 +1,10 @@
+package AffichageEmployee;
+
+import ElementDeBase.Film;
+import ElementDeBase.Membre;
+import ElementDeBase.Reduction;
+import ElementDeBase.Reservation;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -22,6 +29,7 @@ public class MenuModif extends JFrame{
             add(label);
             add(panelBis);
         }
+        add(new JButton("Retour"));
         add(new JButton("Ajouter un Film"));
         setSize(500,40*(len+1));
         setVisible(true);
@@ -47,13 +55,14 @@ public class MenuModif extends JFrame{
             add(label);
             add(panelBis);
         }
-        add(new JButton("Ajouter un Film"));
+        add(new JButton("Retour"));
+        add(new JButton("Ajouter un Membre"));
         setSize(500,40*(len+1));
         setVisible(true);
     }
 
     public void ModifResa(Reservation Lib[]){
-        setTitle("Menu Film");
+        setTitle("Menu Réservation");
         int len = Lib.length;
         GridLayout grid = new GridLayout(len+1, 2);
         grid.setVgap(3);
@@ -72,7 +81,34 @@ public class MenuModif extends JFrame{
             add(label);
             add(panelBis);
         }
-        add(new JButton("Ajouter un Film"));
+        add(new JButton("Retour"));
+        add(new JButton("Ajouter une Réservation"));
+        setSize(500,40*(len+1));
+        setVisible(true);
+    }
+
+    public void ModifReduc(Reduction Lib[]){
+        setTitle("Menu Réduction");
+        int len = Lib.length;
+        GridLayout grid = new GridLayout(len+1, 2);
+        grid.setVgap(3);
+        setLayout(grid);
+
+        for(int i=0;i<len;i++){
+            JLabel label = new JLabel("  " + Lib[i].nom);
+            JPanel panelBis = new JPanel();
+            GridLayout gridBis = new GridLayout(1, 2);
+            gridBis.setHgap(3);
+            panelBis.setLayout(gridBis);
+
+            panelBis.add(new JButton("Modifier"));
+            panelBis.add(new JButton("Supprimer"));
+
+            add(label);
+            add(panelBis);
+        }
+        add(new JButton("Retour"));
+        add(new JButton("Ajouter une Réduction"));
         setSize(500,40*(len+1));
         setVisible(true);
     }

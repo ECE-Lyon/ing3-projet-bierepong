@@ -1,9 +1,11 @@
+package ElementDeBase;
+
 public class Reservation {
     public int nbTickets;
     public int numDeResa;
     public String idAcheteur;
     public String titreFilm;
-    public int reduc;
+    public String reduc;
 
     public int getNbTickets() { return nbTickets; }
     public void setNbTickets(int nbTickets) { this.nbTickets = nbTickets; }
@@ -17,7 +19,7 @@ public class Reservation {
     public int getNumDeResa() { return numDeResa; }
     public void setNumDeResa(int numDeResa) { this.numDeResa = numDeResa; }
 
-    public int getReduc() { return reduc; }
-    public void setReduc(int reduc) { this.reduc = reduc; }
+    public String getReduc() { return reduc; }
+    public void setReduc(String reduc) { this.reduc = reduc; }
 }
 

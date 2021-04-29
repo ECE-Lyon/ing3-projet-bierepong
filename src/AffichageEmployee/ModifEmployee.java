@@ -1,32 +1,45 @@
+package AffichageEmployee;
+
+import ElementDeBase.Film;
+import ElementDeBase.Membre;
+import ElementDeBase.Reduction;
+import ElementDeBase.Reservation;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ModifEmployee extends JFrame {
     protected void ModifFilm(Film film) {
         setTitle("Modification Film");
-        GridLayout grid = new GridLayout(5, 2);
+
+        Container contentPane=this.getContentPane();
+        GridLayout grid = new GridLayout(6, 2);
         grid.setVgap(3);
-        setLayout(grid);
+        contentPane.setLayout(grid);
 
         JLabel titreLab = new JLabel("  Titre :");
         JTextField titreField = new JTextField(film.title);
-        add(titreLab);add(titreField);
+        contentPane.add(titreLab);contentPane.add(titreField);
 
         JLabel genreLab = new JLabel("  Genre :");
         JTextField genreField = new JTextField(film.genre);
-        add(genreLab);add(genreField);
+        contentPane.add(genreLab);contentPane.add(genreField);
 
         JLabel dateLab = new JLabel("  Date de sortie :");
         JTextField dateField = new JTextField(film.releaseDate);
-        add(dateLab);add(dateField);
+        contentPane.add(dateLab);contentPane.add(dateField);
 
         JLabel dureeLab = new JLabel("  Durée :");
         JTextField dureeField = new JTextField(Integer.toString(film.runningTime));
-        add(dureeLab);add(dureeField);
+        contentPane.add(dureeLab);contentPane.add(dureeField);
 
         JLabel afficheLab = new JLabel("  Affiche :");
         JTextField afficheField = new JTextField(film.image);
-        add(afficheLab);add(afficheField);
+        contentPane.add(afficheLab);contentPane.add(afficheField);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);
@@ -36,7 +49,7 @@ public class ModifEmployee extends JFrame {
         setTitle("Modification Membre");
 
         Container contentPane=this.getContentPane();
-        GridLayout grid = new GridLayout(5, 2);
+        GridLayout grid = new GridLayout(6, 2);
         grid.setVgap(3);
         contentPane.setLayout(grid);
 
@@ -70,6 +83,11 @@ public class ModifEmployee extends JFrame {
         student.add(oui);
         student.add(non);
         contentPane.add(etudiantLab);contentPane.add(student);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
+
         setSize(500,250);
         setVisible(true);
     }
@@ -78,7 +96,7 @@ public class ModifEmployee extends JFrame {
         setTitle("Modification Réservation");
 
         Container contentPane=this.getContentPane();
-        GridLayout grid = new GridLayout(5, 2);
+        GridLayout grid = new GridLayout(6, 2);
         grid.setVgap(3);
         contentPane.setLayout(grid);
 
@@ -99,48 +117,83 @@ public class ModifEmployee extends JFrame {
         contentPane.add(nbLab);contentPane.add(nbField);
 
         JLabel reducLab = new JLabel("  Réduction :");
-        JTextField reducField = new JTextField(Integer.toString(resa.reduc));
+        JTextField reducField = new JTextField(resa.reduc);
         contentPane.add(reducLab);contentPane.add(reducField);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
+
+        setSize(500,250);
+        setVisible(true);
+    }
+
+    protected void ModifReduc(Reduction reduc) {
+        setTitle("Modification Réduction");
+
+        Container contentPane=this.getContentPane();
+        GridLayout grid = new GridLayout(3, 2);
+        grid.setVgap(3);
+        contentPane.setLayout(grid);
+
+
+        JLabel nomLab = new JLabel("  Nom :");
+        JTextField nomField = new JTextField(reduc.nom);
+        contentPane.add(nomLab);contentPane.add(nomField);
+
+        JLabel montantLab = new JLabel("  Montant :");
+        JTextField montantField = new JTextField(Integer.toString(reduc.montant));
+        contentPane.add(montantLab);contentPane.add(montantField);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);
     }
 
     protected void AddFilm() {
-        setTitle("Modification Film");
-        GridLayout grid = new GridLayout(5, 2);
+        setTitle("Ajouter un Film");
+
+        Container contentPane=this.getContentPane();
+        GridLayout grid = new GridLayout(6, 2);
         grid.setVgap(3);
-        setLayout(grid);
+        contentPane.setLayout(grid);
 
         JLabel titreLab = new JLabel("  Titre :");
         JTextField titreField = new JTextField("");
-        add(titreLab);add(titreField);
+        contentPane.add(titreLab);contentPane.add(titreField);
 
         JLabel genreLab = new JLabel("  Genre :");
         JTextField genreField = new JTextField("");
-        add(genreLab);add(genreField);
+        contentPane.add(genreLab);contentPane.add(genreField);
 
         JLabel dateLab = new JLabel("  Date de sortie :");
         JTextField dateField = new JTextField("");
-        add(dateLab);add(dateField);
+        contentPane.add(dateLab);contentPane.add(dateField);
 
         JLabel dureeLab = new JLabel("  Durée :");
         JTextField dureeField = new JTextField("");
-        add(dureeLab);add(dureeField);
+        contentPane.add(dureeLab);contentPane.add(dureeField);
 
         JLabel afficheLab = new JLabel("  Affiche :");
         JTextField afficheField = new JTextField("");
-        add(afficheLab);add(afficheField);
+        contentPane.add(afficheLab);contentPane.add(afficheField);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);
     }
 
     protected void AddMembre() {
-        setTitle("Modification Membre");
+        setTitle("Ajouter un Membre");
 
         Container contentPane=this.getContentPane();
-        GridLayout grid = new GridLayout(5, 2);
+        GridLayout grid = new GridLayout(6, 2);
         grid.setVgap(3);
         contentPane.setLayout(grid);
 
@@ -168,6 +221,11 @@ public class ModifEmployee extends JFrame {
         student.add(oui);
         student.add(non);
         contentPane.add(etudiantLab);contentPane.add(student);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
+
         setSize(500,250);
         setVisible(true);
     }
@@ -175,10 +233,10 @@ public class ModifEmployee extends JFrame {
     protected void AddResa() {
         int numDeResa = 69;
 
-        setTitle("Modification Réservation");
+        setTitle("Ajouter une Réservation");
 
         Container contentPane=this.getContentPane();
-        GridLayout grid = new GridLayout(5, 2);
+        GridLayout grid = new GridLayout(6, 2);
         grid.setVgap(3);
         contentPane.setLayout(grid);
 
@@ -201,6 +259,35 @@ public class ModifEmployee extends JFrame {
         JLabel reducLab = new JLabel("  Réduction :");
         JTextField reducField = new JTextField("");
         contentPane.add(reducLab);contentPane.add(reducField);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
+
+        setSize(500,250);
+        setVisible(true);
+    }
+
+    protected void AddReduc() {
+        setTitle("Modification Réduction");
+
+        Container contentPane=this.getContentPane();
+        GridLayout grid = new GridLayout(3, 2);
+        grid.setVgap(3);
+        contentPane.setLayout(grid);
+
+
+        JLabel nomLab = new JLabel("  Nom :");
+        JTextField nomField = new JTextField("");
+        contentPane.add(nomLab);contentPane.add(nomField);
+
+        JLabel montantLab = new JLabel("  Montant :");
+        JTextField montantField = new JTextField("");
+        contentPane.add(montantLab);contentPane.add(montantField);
+
+        JButton annule = new JButton("Annuler");
+        JButton valider = new JButton("Valider");
+        contentPane.add(annule);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);
@@ -226,10 +313,10 @@ public class ModifEmployee extends JFrame {
         resa.setNumDeResa(1);
         resa.setIdAcheteur(membre.id);
         resa.setNbTickets(2);
-        resa.setReduc(25);
+        resa.setReduc("Etudiante");
         resa.setTitreFilm(film_1.title);
 
         ModifEmployee modif = new ModifEmployee();
-        modif.AddMembre();
+        modif.AddFilm();
     }
 }

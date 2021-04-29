@@ -1,6 +1,7 @@
+import ElementDeBase.Film;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class FilmWindow extends JFrame{
@@ -134,7 +135,7 @@ public class FilmWindow extends JFrame{
 
         JPanel panelTer = new JPanel();
         panelTer.setLayout(new GridLayout(1,3));
-        label = new JLabel("Reduction");
+        label = new JLabel("Réduction");
         JRadioButton oui = new JRadioButton("oui");
         JRadioButton non = new JRadioButton("non");
         panelTer.add(label);
@@ -173,7 +174,7 @@ public class FilmWindow extends JFrame{
         return panel;
     }
 
-    public JPanel firstDuoPanel (Film film1,Film film2){
+    public JPanel firstDuoPanel (Film film1, Film film2){
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3,1));
         JLabel label = new JLabel("Choisit un film chakal");
