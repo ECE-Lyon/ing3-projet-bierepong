@@ -48,7 +48,7 @@ public class FilmWindow extends FonctionsSwing{
         film_6.setImage("Images/Shrek.jpg");
 
 
-        Film Lib[] = {film_1, film_2, film_3, film_4, film_5, film_6};
+        Film Lib[] = {film_1, film_2, film_3, film_4, film_5,film_6};
 
         int nbFilm = Lib.length;
 
