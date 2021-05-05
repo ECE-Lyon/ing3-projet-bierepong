@@ -45,6 +45,14 @@ public class MenuModif extends JFrame{
         film_6.setRunningTime(95);
         film_6.setImage("Images/Shrek.jpg");
 
+        Membre membre = new Membre();
+        membre.setAge(20);
+        membre.setId("xX_L0rd_BG_Du_06_Xx");
+        membre.setMDP("mdp");
+        membre.setNom("Monot");
+        membre.setPrenom("Romain");
+        membre.setEtudiant(true);
+
 
         Film Lib[] = {film_1, film_2, film_3, film_5,film_6};
 

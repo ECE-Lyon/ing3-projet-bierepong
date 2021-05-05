@@ -32,7 +32,7 @@ public class MenuEmployee extends JFrame{
         JButton discounts=new JButton("Rajouter des offres de réductions");//S'en occuper plus tard
         JButton records=new JButton("Mettre à jour les données clients");
         JButton stat=new JButton("Voir les statistiques");
-        JButton resa=new JButton("Modifier les commandes");
+        JButton resa=new JButton("Modifier les reservations");
 
         update.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

@@ -1,4 +1,4 @@
-package AffichageClients;
+package Useless;
 
 import java.awt.*;
 import javax.swing.*;

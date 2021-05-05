@@ -317,6 +317,6 @@ public class ModifEmployee extends JFrame {
         resa.setTitreFilm(film_1.title);
 
         ModifEmployee modif = new ModifEmployee();
-        modif.AddFilm();
+        modif.ModifMembre(membre);
     }
 }

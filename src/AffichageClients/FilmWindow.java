@@ -1,3 +1,5 @@
+package AffichageClients;
+
 import ElementDeBase.Film;
 
 import javax.swing.*;
@@ -43,7 +45,7 @@ public class FilmWindow extends JFrame{
 
         String[] listeReduc = {"Aucune", "Etudiant", "Senior", "Prolétaire","Ex-Taulard"};
 
-        Film Lib[] = {film_1, film_2, film_3, film_5,film_6};
+        Film Lib[] = {film_1, film_2, film_3,film_5, film_5,film_6};
 
         int nbFilm = Lib.length;
 
@@ -55,13 +57,14 @@ public class FilmWindow extends JFrame{
         grid.setHgap(10);
         setLayout(grid);
 
+        //Cette boucle sert à afficher les films les uns après les autres
         for (int j = 0; j <(nbFilm - 1) / 5 + 1; j++){
-            if (nbFilm-(j*5)<5){
+            if (nbFilm-(j*5)<5){ // if (il reste moins de 5 films à afficher sur une ligne)
                 for (int i = 0; i < nbFilm%5; i++) {
                     JLabel label = Film.LabelIconeFilmBis(Lib[i+j*5]);
                     add(label);
                 }
-                for (int i = 0; i < 5 - nbFilm % 5; i++) {
+                for (int i = 0; i < 5 - nbFilm % 5; i++) { //Complete le reste de la ligne de case vide
                     JLabel blank = new JLabel("");
                     add(blank);
                 }
@@ -69,7 +72,7 @@ public class FilmWindow extends JFrame{
                     JTextArea txt = Film.TextAreaBis(Lib[i+j*5].title + "\n" + Lib[i+j*5].genre + "\n" + Lib[i+j*5].releaseDate + "\n" + Integer.toString(Lib[i+j*5].runningTime) + " min");
                     add(txt);
                 }
-                for (int i = 0; i < 5 - nbFilm % 5; i++) {
+                for (int i = 0; i < 5 - nbFilm % 5; i++) { //Complete le reste de la ligne de case vide
                     JLabel blank = new JLabel("");
                     add(blank);
                 }
