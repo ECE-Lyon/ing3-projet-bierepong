@@ -1,7 +1,14 @@
 package AffichageEmployee;
 
+import AffichageEmployee.MenuModifsFilm.MenuModifFilm;
+import AffichageEmployee.MenuModifsMembre.MenuModifMembre;
+import AffichageEmployee.MenuModifsReduc.MenuModifReduc;
+import AffichageEmployee.MenuModifResa.MenuModifResa;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuEmployee extends JFrame{
     public MenuEmployee(){
@@ -27,6 +34,30 @@ public class MenuEmployee extends JFrame{
         JButton stat=new JButton("Voir les statistiques");
         JButton resa=new JButton("Modifier les commandes");
 
+        update.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MenuModifFilm();
+            }
+        });
+        discounts.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MenuModifReduc();
+            }
+        });
+        records.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MenuModifMembre();
+            }
+        });
+        resa.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MenuModifResa();
+            }
+        });
         contentPane.add(panel);contentPane.add(update);contentPane.add(discounts);contentPane.add(records);contentPane.add(stat);contentPane.add(resa);
         setSize(500,300);
         setVisible(true);

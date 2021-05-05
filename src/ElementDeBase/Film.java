@@ -19,6 +19,15 @@ public class Film {
         nbDeVente = 0;
     }
 
+    public Film(String title,String releaseDate,int runningTime,String genre,String image,int nbDeVente){
+        this.title=title;
+        this.releaseDate=releaseDate;
+        this.runningTime=runningTime;
+        this.genre=genre;
+        this.image=image;
+        this.nbDeVente=nbDeVente;
+    }
+
     public String getTitle(){
         return title;
     }

@@ -7,6 +7,14 @@ public class Reservation {
     public String titreFilm;
     public String reduc;
 
+    public Reservation(int nbTickets,int numDeResa,String idAcheteur,String titreFilm,String reduc){
+        this.nbTickets=nbTickets;
+        this.numDeResa=numDeResa;
+        this.idAcheteur=idAcheteur;
+        this.titreFilm=titreFilm;
+        this.reduc=reduc;
+    }
+
     public int getNbTickets() { return nbTickets; }
     public void setNbTickets(int nbTickets) { this.nbTickets = nbTickets; }
 

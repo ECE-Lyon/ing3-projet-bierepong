@@ -301,7 +301,7 @@ public class ModifEmployee extends JFrame {
         film_1.setRunningTime(106);
         film_1.setImage("Images/ShrekPNG.png");
 
-        Membre membre = new Membre();
+        Membre membre = new Membre("xX_L0rd_BG_Du_06_Xx","mdp","Monot","Romain",20,true);
         membre.setAge(20);
         membre.setId("xX_L0rd_BG_Du_06_Xx");
         membre.setMDP("mdp");
@@ -309,7 +309,7 @@ public class ModifEmployee extends JFrame {
         membre.setPrenom("Romain");
         membre.setEtudiant(true);
 
-        Reservation resa = new Reservation();
+        Reservation resa = new Reservation(2,1,membre.id,film_1.title,"Etudiante");
         resa.setNumDeResa(1);
         resa.setIdAcheteur(membre.id);
         resa.setNbTickets(2);

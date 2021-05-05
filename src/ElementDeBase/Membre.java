@@ -8,6 +8,17 @@ public class Membre {
     public int age;
     public boolean etudiant;
 
+    public Membre(){};
+
+    public Membre(String id,String mdp,String nom,String prenom,int age,boolean etudiant){
+        this.id=id;
+        this.mdp=mdp;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.age=age;
+        this.etudiant=etudiant;
+    }
+
     public void setAge(int age) { this.age = age; }
     public int getAge() { return age; }
 
