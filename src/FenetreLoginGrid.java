@@ -1,9 +1,11 @@
 package com.company;
+import Models.Membre;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class FenetreLoginGrid extends JFrame {
     public FenetreLoginGrid() {
@@ -12,11 +14,10 @@ public class FenetreLoginGrid extends JFrame {
 
         JLabel Titre,Mail,MDP,creercompte;//Empty;
         JTextField ValMail,valMDP;
-        JButton ButSubmit, ButCreercompte, ButSubmitEmploye;
+        JButton ButSubmit, ButCreercompte, ButSubmitEmploye,ButGuest;
 
         Titre=new JLabel("Robert Pathé");
         Mail=new JLabel("Mail:");
-        //Empty=new JLabel("\n\n");
         MDP=new JLabel("MdP:");
         creercompte=new JLabel("Pas de compte?");
 
@@ -25,6 +26,7 @@ public class FenetreLoginGrid extends JFrame {
 
         ButSubmit=new JButton("Connexion");
         ButSubmitEmploye=new JButton("Connexion staff");
+        ButGuest=new JButton("Se connecter sans compte");
 
         ButCreercompte=new JButton("Créer un compte");
 
@@ -40,57 +42,70 @@ public class FenetreLoginGrid extends JFrame {
         Login.setLayout(new GridLayout(3,2));
 
         JPanel Buttuns = new JPanel();
-        //Login.setLayout(new GridLayout(3,2));
 
         JPanel CreerCompte = new JPanel();
-        //CreerCompte.setLayout(new GridLayout(1,2));
 
-
-        ButSubmit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(ValMail.getText().equals("admin") && valMDP.getText().equals("password")){
-                    dispose();
-                    try {
-                        new FenetrePrincipale();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+        ButSubmit.addActionListener(e -> {
+        int n=0;
+            try (Connection con = DriverManager.getConnection("jdbc:h2:./default"); PreparedStatement statement = con.prepareStatement("select MAIL,PASSWORD from members")) {
+                //statement.setString(1, "mail");
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String mail = resultSet.getString("mail");
+                        String password = resultSet.getString("password");
+                        if (ValMail.getText().equals(mail) && valMDP.getText().equals(password)) {
+                            dispose();
+                            new FenetrePrincipale();
+                            n=1;
+                        }
                     }
-                }
+                    if(n==0){JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrectssssss");}
 
-                else{
-                    JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrects");
                 }
+            } catch (SQLException | IOException throwables) {
+                throwables.printStackTrace();
             }
         });
 
-        ButSubmitEmploye.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(ValMail.getText().equals("admin") && valMDP.getText().equals("password")){
-                    dispose();
-                    try {
-                        new FenetrePrincipaleEmploye();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+        ButSubmitEmploye.addActionListener(e -> {
+
+            try (Connection con = DriverManager.getConnection("jdbc:h2:./default"); PreparedStatement statement = con.prepareStatement("select MAIL,PASSWORD from members")) { //ATT EMPLOYES!!!
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()) {
+                        String mail = resultSet.getString("mail");
+                        String password = resultSet.getString("password");
+                        if (ValMail.getText().equals(mail) && valMDP.getText().equals(password)) {
+                            dispose();
+                            new FenetrePrincipale();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrects");
+                        }
                     }
                 }
-
-                else{
-                    JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrects");
-                }
+            } catch (SQLException | IOException throwables) {
+                throwables.printStackTrace();
             }
         });
 
-        ButCreercompte.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                //setVisible(false);
-                new FenetreCreerCompteGrid();
+        ButCreercompte.addActionListener(e -> {
+            dispose();
+            new FenetreCreerCompteGrid();
+        });
+
+
+        ButGuest.addActionListener(e -> {
+            dispose();
+            try {
+                new FenetrePrincipale();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
         });
 
 
         Top.add(Titre);Login.add(Mail); Login.add(ValMail);Login.add(MDP);Login.add(valMDP);
-        Buttuns.add(ButSubmit);Buttuns.add(ButSubmitEmploye);CreerCompte.add(creercompte);CreerCompte.add(ButCreercompte);
+        Buttuns.add(ButSubmit);Buttuns.add(ButGuest);Buttuns.add(ButSubmitEmploye);CreerCompte.add(creercompte);CreerCompte.add(ButCreercompte);
 
         add(Top);add(Login);add(Buttuns);add(CreerCompte);
 
