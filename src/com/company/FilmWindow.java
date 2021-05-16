@@ -1,5 +1,4 @@
-package AffichageClients;
-
+package com.company;
 import ElementDeBase.Film;
 
 import javax.swing.*;

@@ -1,7 +1,6 @@
 package AffichageEmployee.MenuModifsMembre;
 
 import AffichageEmployee.MenuEmployee;
-import AffichageEmployee.MenuModifsMembre.ModifMembre;
 import ElementDeBase.Membre;
 
 import javax.swing.*;
@@ -62,10 +61,8 @@ public class MenuModifMembre extends JFrame{
     }
     public Membre[] getMembre(){
         Membre[] membres=new Membre[2];
-        membres[0]=new Membre("michel","michelineCla+b'L","Michelin", "Michel",
-                31,true);
-        membres[1] = new Membre("xX_L0rd_BG_Du_06_Xx","mdp","Monot","Romain",
-                20,true);
+        membres[0]=new Membre();
+        membres[1] = new Membre();
         return membres;
     }
 

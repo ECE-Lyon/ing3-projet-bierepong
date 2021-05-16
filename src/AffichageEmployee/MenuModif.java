@@ -6,7 +6,6 @@ import ElementDeBase.Reduction;
 import ElementDeBase.Reservation;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MenuModif extends JFrame{
     public static void main(String[] args) {
