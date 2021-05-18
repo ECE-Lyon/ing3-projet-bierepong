@@ -26,7 +26,6 @@ public class FenetreLoginGrid extends JFrame {
         JTextField ValMail,valMDP;
         JButton ButSubmit, ButCreercompte, ButSubmitEmploye,ButGuest;
 
-        Titre=new JLabel("Bienvenue au cinéma Robert Pathé!");
         Mail=new JLabel("Mail:");
         MDP=new JLabel("MdP:");
         creercompte=new JLabel("Pas de compte?");
@@ -46,8 +45,6 @@ public class FenetreLoginGrid extends JFrame {
 
         JPanel Top = new JPanel();
         Top.setBackground(Color.YELLOW);
-        //Top.setLayout(new GridLayout(1,1));
-        //Top.setLayout(new GridLayout(1,1));
 
         JPanel Login = new JPanel();
         Login.setLayout(new GridLayout(3,2));
@@ -138,10 +135,6 @@ public class FenetreLoginGrid extends JFrame {
             throwables.printStackTrace();
         }
 
-        //Login.setBackground(Color.getHSBColor(255,255,204));
-        //Buttuns.setBackground(Color.getHSBColor(173,216,230));
-        //CreerCompte.setBackground(Color.getHSBColor(213,255,255));
-        //Top.add(Titre);
         Login.add(Mail); Login.add(ValMail);Login.add(MDP);Login.add(valMDP);
         Buttuns.add(ButSubmit);Buttuns.add(ButGuest);Buttuns.add(ButSubmitEmploye);CreerCompte.add(creercompte);CreerCompte.add(ButCreercompte);
 

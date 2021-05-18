@@ -72,7 +72,7 @@ public class FenetreCreerCompteGrid extends JFrame {
 
             //if(!Mail1.contains("@")){JOptionPane.showMessageDialog(Buttuns, "Adresse Mail invalide!");}
 
-            if(Password.equals(verifPassord)){
+            if(Password.equals(verifPassord) && !(nom.isEmpty()) &&!(prenom.isEmpty()) &&!(Mail1.isEmpty()) &&!(Password.isEmpty())){
                 Sauvegarder(membre);
                 dispose();
                 try {
@@ -82,7 +82,7 @@ public class FenetreCreerCompteGrid extends JFrame {
                 }
             }
             else{
-                JOptionPane.showMessageDialog(Buttuns, "Vos mots de passe doivent être identiques!");
+                JOptionPane.showMessageDialog(Buttuns, "Veuillez rentrer des informations valides!");
             }
         });
 

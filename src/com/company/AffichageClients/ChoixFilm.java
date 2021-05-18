@@ -45,7 +45,7 @@ public class ChoixFilm extends JFrame {
                 }
                 for (int i = 0; i < nbFilm % 5; i++) {
                     JTextArea txt = Film.TextAreaBis(lib.get(i + j * 5).title + "\n" + lib.get(i + j * 5).genre + "\n"
-                            + lib.get(i + j * 5).releaseDate + "\n" + Integer.toString(lib.get(i + j * 5).runningTime)
+                            + lib.get(i + j * 5).releaseDate + "\n" + lib.get(i + j * 5).runningTime
                             + " min");
                     add(txt);
                 }
@@ -60,7 +60,7 @@ public class ChoixFilm extends JFrame {
                 }
                 for (int i = 0; i < 5; i++) {
                     JTextArea txt = Film.TextAreaBis(lib.get(i).title + "\n" + lib.get(i).genre + "\n" +
-                            lib.get(i).releaseDate + "\n" + Integer.toString(lib.get(i).runningTime) + " min");
+                            lib.get(i).releaseDate + "\n" + lib.get(i).runningTime + " min");
                     add(txt);
                 }
             }
@@ -99,53 +99,41 @@ public class ChoixFilm extends JFrame {
         }
 
         JButton acheter = new JButton("Acheter");
-        acheter.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Film film=(Film) choixFilm.getSelectedItem();
-                int nbTickets=Integer.parseInt(champ.getText());
-                    if(nbTickets>=1 && !(champ.getText().isEmpty()) ){
-                        int numResa =reservationArrayList.get(0).getNumDeResa();
-                        for (Reservation reservation : reservationArrayList) {
-                            if (numResa < reservation.getNumDeResa()) {
-                                numResa = reservation.getNumDeResa();
-                            }
-                        }
-                        numResa++;
-                        Reservation resa=new Reservation(nbTickets,numResa,membre,film);
-                        dispose();
-                        try {
-                            new Confirmation(resa);
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
+        acheter.addActionListener(e -> {
+            Film film=(Film) choixFilm.getSelectedItem();
+            int nbTickets=Integer.parseInt(champ.getText());
+                if(nbTickets>=1 && !(champ.getText().isEmpty()) ){
+                    int numResa =reservationArrayList.get(0).getNumDeResa();
+                    for (Reservation reservation : reservationArrayList) {
+                        if (numResa < reservation.getNumDeResa()) {
+                            numResa = reservation.getNumDeResa();
                         }
                     }
-                    else{
-                        JOptionPane.showMessageDialog(panel, "Veuillez saisir un nombre de tickets valide");
+                    numResa++;
+                    Reservation resa=new Reservation(nbTickets,numResa,membre,film);
+                    dispose();
+                    try {
+                        new Confirmation(resa);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
                     }
-            }
+                }
+                else{
+                    JOptionPane.showMessageDialog(panel, "Veuillez saisir un nombre de tickets valide");
+                }
         });
 
         add(acheter);
         JLabel blank = new JLabel("");
         add(blank);
         JButton logOut = new JButton("Log out");
-        logOut.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new FenetreLoginGrid();
-            }
+        logOut.addActionListener(e -> {
+            dispose();
+            new FenetreLoginGrid();
         });
         add(logOut);
 
         setSize(new Dimension(1040, tailleFenetre * 150));
         setVisible(true);
-    }
-
-
-    public static void main(String[] args) throws IOException {
-        Reduction reduction = new Reduction("student", 4);
-        Membre membre = new Membre("a@g.com", "passw0rd", "Michou", "Michel",
-                reduction);
-        new ChoixFilm(membre);
     }
 }
