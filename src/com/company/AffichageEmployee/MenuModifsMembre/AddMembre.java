@@ -5,8 +5,6 @@ import com.company.ElementDeBase.Reduction;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import static com.company.ElementDeBase.Membre.sauvegarderMembre;
@@ -43,29 +41,25 @@ public class AddMembre extends JFrame{
         JComboBox reducComboBox=new JComboBox(reductions.toArray());
         contentPane.add(reducLab);contentPane.add(reducComboBox);
 
-        JButton annule = new JButton("Annuler");
-        annule.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new MenuModifMembre();
-            }
+        JButton annuler = new JButton("Annuler");
+        annuler.addActionListener(e -> {
+            dispose();
+            new MenuModifMembre();
         });
 
         JButton valider = new JButton("Valider");
-        valider.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String mail=mailField.getText();
-                String prenom=prenomField.getText();
-                String nom=nomField.getText();
-                String password=mdpField.getText();
-                Reduction reduction=(Reduction) reducComboBox.getSelectedItem();
-                Membre membre=new Membre(mail,password,prenom,nom,reduction);
-                sauvegarderMembre(membre);
-                dispose();
-                new MenuModifMembre();
-            }
+        valider.addActionListener(e -> {
+            String mail=mailField.getText();
+            String prenom=prenomField.getText();
+            String nom=nomField.getText();
+            String password=mdpField.getText();
+            Reduction reduction=(Reduction) reducComboBox.getSelectedItem();
+            Membre membre=new Membre(mail,password,prenom,nom,reduction);
+            sauvegarderMembre(membre);
+            dispose();
+            new MenuModifMembre();
         });
-        contentPane.add(annule);contentPane.add(valider);
+        contentPane.add(annuler);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);

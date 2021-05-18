@@ -1,10 +1,9 @@
 package com.company.Connexion;
 
+import com.company.AffichageClients.ChoixFilm;
 import com.company.AffichageEmployee.MenuEmployee;
 import com.company.ElementDeBase.Membre;
 import com.company.ElementDeBase.Reduction;
-import com.company.AffichageClients.ChoixFilm;
-import com.company.Connexion.FenetreCreerCompteGrid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +32,7 @@ public class FenetreLoginGrid extends JFrame {
 
         ButSubmit=new JButton("Connexion");
         ButSubmitEmploye=new JButton("Connexion staff");
-        ButGuest=new JButton("Se connecter sans compte");
+        ButGuest=new JButton("Réserver sans compte");
 
         ButCreercompte=new JButton("Créer un compte");
 
@@ -43,12 +42,11 @@ public class FenetreLoginGrid extends JFrame {
 
         JPanel Top = new JPanel();
         Top.setBackground(Color.YELLOW);
-        //Top.setLayout(new GridLayout(1,1));
 
         JPanel Login = new JPanel();
         Login.setLayout(new GridLayout(3,2));
 
-        JPanel Buttuns = new JPanel();
+        JPanel Buttons = new JPanel();
 
         JPanel CreerCompte = new JPanel();
 
@@ -56,8 +54,8 @@ public class FenetreLoginGrid extends JFrame {
 
         ButSubmit.addActionListener(e -> {
         int n=0;
-            try (Connection con = DriverManager.getConnection("jdbc:h2:./default"); PreparedStatement statement = con.prepareStatement("select * from members")) {
-                //statement.setString(1, "mail");
+            try (Connection con = DriverManager.getConnection("jdbc:h2:./default");
+                 PreparedStatement statement = con.prepareStatement("select * from members")) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while(resultSet.next()) {
                         String mail = resultSet.getString("mail");
@@ -66,9 +64,9 @@ public class FenetreLoginGrid extends JFrame {
                         String prenom = resultSet.getString("prenom");
                         String nomreduction = resultSet.getString("reduction");
                         int montantreduction =0;
-                        for (int i=0;i<reductionArrayList.size();i++){
-                            if(reductionArrayList.get(i).nom.equals(nomreduction)){
-                                montantreduction = reductionArrayList.get(i).montant;
+                        for (Reduction reduction:reductionArrayList){
+                            if(reduction.nom.equals(nomreduction)){
+                                montantreduction = reduction.montant;
                             }
                         }
                         Reduction RED = new Reduction(nomreduction,montantreduction);
@@ -80,7 +78,7 @@ public class FenetreLoginGrid extends JFrame {
                             n=1;
                         }
                     }
-                    if(n==0){JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrects!");}
+                    if(n==0){JOptionPane.showMessageDialog(Buttons, "Identifiants incorrects!");}
 
                 }
             } catch (SQLException | IOException throwables) {
@@ -90,7 +88,8 @@ public class FenetreLoginGrid extends JFrame {
 
         ButSubmitEmploye.addActionListener(e -> {
 
-            try (Connection con = DriverManager.getConnection("jdbc:h2:./default"); PreparedStatement statement = con.prepareStatement("select MAIL,PASSWORD from employee")) {
+            try (Connection con = DriverManager.getConnection("jdbc:h2:./default");
+                 PreparedStatement statement = con.prepareStatement("select MAIL,PASSWORD from employee")) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while(resultSet.next()) {
                         String mail = resultSet.getString("mail");
@@ -100,7 +99,7 @@ public class FenetreLoginGrid extends JFrame {
                             new MenuEmployee();
                         }
                         else{
-                            JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrects");
+                            JOptionPane.showMessageDialog(Buttons, "Identifiants incorrects");
                         }
                     }
                 }
@@ -128,11 +127,16 @@ public class FenetreLoginGrid extends JFrame {
 
 
         Top.add(Titre);Login.add(Mail); Login.add(ValMail);Login.add(MDP);Login.add(valMDP);
-        Buttuns.add(ButSubmit);Buttuns.add(ButGuest);Buttuns.add(ButSubmitEmploye);CreerCompte.add(creercompte);CreerCompte.add(ButCreercompte);
+        Buttons.add(ButSubmit);Buttons.add(ButGuest);Buttons.add(ButSubmitEmploye);
+        CreerCompte.add(creercompte);CreerCompte.add(ButCreercompte);
 
-        add(Top);add(Login);add(Buttuns);add(CreerCompte);
+        add(Top);add(Login);add(Buttons);add(CreerCompte);
 
         setSize(new Dimension(500,500));
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new FenetreLoginGrid();
     }
 }

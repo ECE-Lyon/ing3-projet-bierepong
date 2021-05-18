@@ -8348,3 +8348,15 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/romai
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 54 more
+2021-05-18 17:29:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "15 Janvier 2004" [22018-200]
+2021-05-18 17:29:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "15 Janvier 2004" [22018-200]
+2021-05-18 17:29:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "15 Janvier 2004" [22018-200]
+2021-05-18 18:02:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "15 Janvier 2004" [22018-200]
+2021-05-18 18:28:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "15 Janvier 2004" [22018-200]
+2021-05-18 18:28:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "15 Janvier 2004" [22018-200]

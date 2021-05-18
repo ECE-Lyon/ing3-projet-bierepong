@@ -16,14 +16,14 @@ public class Reduction {
     public void setNom(String nom) { this.nom = nom; }
 
     public int getMontant() { return montant; }
-    public void setMontant(int montant) { this.montant = montant; }
 
     public static void sauvegarderReduc(Reduction reduction) {
 
         try {
             Connection con = DriverManager.getConnection("jdbc:h2:./default");
 
-            try (PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO REDUCTION (NOM, MONTANT) VALUES (?, ?)")) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "INSERT INTO REDUCTION (NOM, MONTANT) VALUES (?, ?)")) {
                 preparedStatement.setString(1, reduction.getNom());
                 preparedStatement.setInt(2, reduction.getMontant());
                 preparedStatement.execute();
@@ -36,7 +36,7 @@ public class Reduction {
     }
 
     public static ArrayList<Reduction> listReducMaker() {
-        ArrayList<Reduction> lib = new ArrayList<Reduction>();;
+        ArrayList<Reduction> lib = new ArrayList<>();;
         try (
                 Connection con = DriverManager.getConnection("jdbc:h2:./default");
                 PreparedStatement statement = con.prepareStatement("select * from REDUCTION")) {
@@ -57,14 +57,14 @@ public class Reduction {
     public static void deleteReduc(Reduction reduction){
         try (Connection con = DriverManager.getConnection("jdbc:h2:./default"))
         {
-            try (PreparedStatement preparedStatement = con.prepareStatement("delete from REDUCTION where NOM='"+reduction.getNom()+"'")) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "delete from REDUCTION where NOM='"+reduction.getNom()+"'")) {
                 preparedStatement.execute();
             }
             con.close();
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
-
     }
 
     @Override

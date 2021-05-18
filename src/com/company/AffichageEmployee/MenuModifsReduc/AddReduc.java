@@ -4,8 +4,6 @@ import com.company.ElementDeBase.Reduction;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static com.company.ElementDeBase.Reduction.sauvegarderReduc;
 
@@ -27,26 +25,22 @@ public class AddReduc extends JFrame{
         JTextField montantField = new JTextField("");
         contentPane.add(montantLab);contentPane.add(montantField);
 
-        JButton annule = new JButton("Annuler");
-        annule.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new MenuModifReduc();
-            }
+        JButton annuler = new JButton("Annuler");
+        annuler.addActionListener(e -> {
+            dispose();
+            new MenuModifReduc();
         });
 
         JButton valider = new JButton("Valider");
-        valider.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nom=nomField.getText();
-                int montant=Integer.parseInt(montantField.getText());
-                Reduction reduction=new Reduction(nom,montant);
-                sauvegarderReduc(reduction);
-                dispose();
-                new MenuModifReduc();
-            }
+        valider.addActionListener(e -> {
+            String nom=nomField.getText();
+            int montant=Integer.parseInt(montantField.getText());
+            Reduction reduction=new Reduction(nom,montant);
+            sauvegarderReduc(reduction);
+            dispose();
+            new MenuModifReduc();
         });
-        contentPane.add(annule);contentPane.add(valider);
+        contentPane.add(annuler);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);
