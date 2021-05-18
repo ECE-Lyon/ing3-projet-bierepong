@@ -23,7 +23,6 @@ public class Reservation {
     }
 
     public int getNbTickets() { return nbTickets; }
-    public void setNbTickets(int nbTickets) { this.nbTickets = nbTickets; }
 
     public Film getFilm() { return film; }
     public void setFilm(Film film) { this.film = film; }
@@ -32,17 +31,16 @@ public class Reservation {
     public void setIdAcheteur(Membre membre) { this.membre = membre; }
 
     public int getNumDeResa() { return numDeResa; }
-    public void setNumDeResa(int numDeResa) { this.numDeResa = numDeResa; }
 
     public Reduction getReduction() {return reduction;}
     public void setReduction(Reduction reduction) { this.reduction = reduction;}
 
     public static void sauvegarderResa(Reservation reservation) {
-
         try {
             Connection con = DriverManager.getConnection("jdbc:h2:./default");
 
-            try (PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO RESERVATION (NB_TICKET, NUM_DE_RES, MAIL_ACHETEUR,TITLE_FILM,REDUCTION) VALUES (?, ?, ?, ?, ?)")) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "INSERT INTO RESERVATION (NB_TICKET, NUM_DE_RES, MAIL_ACHETEUR,TITLE_FILM,REDUCTION) VALUES (?, ?, ?, ?, ?)")) {
                 preparedStatement.setInt(1, reservation.getNbTickets());
                 preparedStatement.setInt(2, reservation.getNumDeResa());
                 preparedStatement.setString(3, reservation.getIdAcheteur().getMail());
@@ -50,7 +48,6 @@ public class Reservation {
                 preparedStatement.setString(5, reservation.getReduction().getNom());
                 preparedStatement.execute();
             }
-
             con.close();
         } catch (
                 SQLException throwables) {
@@ -64,7 +61,7 @@ public class Reservation {
     }
 
     public static ArrayList<Reservation> listResaMaker() {
-        ArrayList<Reservation> lib = new ArrayList<Reservation>();
+        ArrayList<Reservation> lib = new ArrayList<>();
         ArrayList<Membre> membreLib = listMembreMaker();
         ArrayList<Reduction> reducLib = listReducMaker();
         ArrayList<Film> filmLib = libMaker();
@@ -97,7 +94,8 @@ public class Reservation {
     public static void deleteResa(Reservation reservation){
         try (Connection con = DriverManager.getConnection("jdbc:h2:./default"))
         {
-            try (PreparedStatement preparedStatement = con.prepareStatement("delete from RESERVATION where NUM_DE_RES="+Integer.toString(reservation.getNumDeResa()))) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "delete from RESERVATION where NUM_DE_RES="+Integer.toString(reservation.getNumDeResa()))) {
                 preparedStatement.execute();
             }
             con.close();

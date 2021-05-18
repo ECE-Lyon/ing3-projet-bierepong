@@ -4,8 +4,6 @@ import com.company.ElementDeBase.Film;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static com.company.ElementDeBase.Film.sauvegarderFilm;
 
@@ -38,29 +36,25 @@ public class AddFilm extends JFrame{
         JTextField afficheField = new JTextField("");
         contentPane.add(afficheLab);contentPane.add(afficheField);
 
-        JButton annule = new JButton("Annuler");
-        annule.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new MenuModifFilm();
-            }
+        JButton annuler = new JButton("Annuler");
+        annuler.addActionListener(e -> {
+            dispose();
+            new MenuModifFilm();
         });
 
         JButton valider = new JButton("Valider");
-        valider.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String titre=titreField.getText();
-                String genre=genreField.getText();
-                String releaseDate=dateField.getText();
-                int duree=Integer.parseInt(dureeField.getText());
-                String image=afficheField.getText();
-                Film film=new Film(titre,releaseDate,duree,genre,image,0);
-                sauvegarderFilm(film);
-                dispose();
-                new MenuModifFilm();
-            }
+        valider.addActionListener(e -> {
+            String titre=titreField.getText();
+            String genre=genreField.getText();
+            String releaseDate=dateField.getText();
+            int duree=Integer.parseInt(dureeField.getText());
+            String image=afficheField.getText();
+            Film film=new Film(titre,releaseDate,duree,genre,image,0);
+            sauvegarderFilm(film);
+            dispose();
+            new MenuModifFilm();
         });
-        contentPane.add(annule);contentPane.add(valider);
+        contentPane.add(annuler);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);

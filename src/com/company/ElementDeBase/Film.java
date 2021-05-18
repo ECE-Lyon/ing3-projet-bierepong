@@ -36,35 +36,21 @@ public class Film {
     public void setTitle(String title){
         this.title = title;
     }
-
     public String getReleaseDate(){
         return releaseDate;
     }
-    public void setReleaseDate(String releaseDate){
-        this.releaseDate = releaseDate;
-    }
-
     public int getRunningTime(){
         return runningTime;
     }
-    public void setRunningTime(int runningTime){
-        this.runningTime = runningTime;
-    }
-
     public String getGenre(){
         return genre;
     }
     public void setGenre(String genre){
         this.genre = genre;
     }
-
     public String getImage(){
         return image;
     }
-    public void setImage(String image){
-        this.image = image;
-    }
-
     public int getNbDeVente(){
         return nbDeVente;
     }
@@ -81,16 +67,15 @@ public class Film {
     public static JLabel LabelIconeFilmBis(Film film) throws IOException {
         BufferedImage myPicture = ImageIO.read(new File(film.image));
         Image dimg = myPicture.getScaledInstance(200,150, Image.SCALE_SMOOTH);
-        JLabel label=new JLabel(new ImageIcon(dimg));
-        return label;
+        return new JLabel(new ImageIcon(dimg));
     }
 
     public static void sauvegarderFilm(com.company.ElementDeBase.Film film) {
-
         try {
             Connection con = DriverManager.getConnection("jdbc:h2:./default");
 
-            try (PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO FILM (TITLE, GENRE,RELEASE_DATE,RUNNING_TIME,ND_DE_SOLD,AFFICHE) VALUES (?, ?, ?, ?, ?, ?)")) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "INSERT INTO FILM (TITLE, GENRE,RELEASE_DATE,RUNNING_TIME,ND_DE_SOLD,AFFICHE) VALUES (?, ?, ?, ?, ?, ?)")) {
                 preparedStatement.setString(1, film.getTitle());
                 preparedStatement.setString(2, film.getGenre());
                 preparedStatement.setString(3, film.getReleaseDate());
@@ -108,7 +93,7 @@ public class Film {
     }
 
     public static ArrayList<Film> libMaker() {
-        ArrayList<Film> lib = new ArrayList<Film>();;
+        ArrayList<Film> lib = new ArrayList<>();;
         try (
                 Connection con = DriverManager.getConnection("jdbc:h2:./default");
                 PreparedStatement statement = con.prepareStatement("select * from FILM")) {
@@ -133,7 +118,8 @@ public class Film {
     public static void deleteFilm(Film film){
         try (Connection con = DriverManager.getConnection("jdbc:h2:./default"))
         {
-            try (PreparedStatement preparedStatement = con.prepareStatement("delete from FILM where TITLE='"+film.getTitle()+"'")) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "delete from FILM where TITLE='"+film.getTitle()+"'")) {
                 preparedStatement.execute();
             }
             con.close();
@@ -142,16 +128,8 @@ public class Film {
         }
 
     }
-
+    // On utilise cette fonction pour afficher juste les titres des films dans les combobox
     public String toString(){
         return title;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        ArrayList<Film> lib = libMaker();
-        System.out.println(lib.size());
-        for (Film film : lib) {
-            System.out.println(film.title);
-        }
     }
 }

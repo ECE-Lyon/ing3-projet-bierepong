@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import static com.company.ElementDeBase.Reduction.listReducMaker;
 
 public class Membre {
-    private String mail;
-    private String password;
-    private String nom;
-    private String prenom;
-    private Reduction reduction;
+    public String mail;
+    public String password;
+    public String nom;
+    public String prenom;
+    public Reduction reduction;
 
     public Membre(String mail,String password,String nom,String prenom,Reduction reduction){
         this.mail=mail;
@@ -21,13 +21,13 @@ public class Membre {
     }
 
     public String getMail() {return mail;}
-    public void setMail(String mail) {mail = mail;}
+    public void setMail(String mail) {this.mail = mail;}
     public String getNom() {return nom;}
-    public void setNom(String nom) {nom = nom;}
+    public void setNom(String nom) {this.nom = nom;}
     public String getPrenom() {return prenom;}
-    public void setPrenom(String prenom) {prenom = prenom;}
+    public void setPrenom(String prenom) {this.prenom = prenom;}
     public String getPassword() {return password;}
-    public void setPassword(String password) {password = password;}
+    public void setPassword(String password) {this.password = password;}
     public Reduction getReduction() {return reduction;}
     public void setReduction(Reduction reduction) {this.reduction = reduction;    }
 
@@ -36,7 +36,8 @@ public class Membre {
         try {
             Connection con = DriverManager.getConnection("jdbc:h2:./default");
 
-            try (PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO MEMBERS (MAIL, PASSWORD,NOM,PRENOM,REDUCTION) VALUES (?, ?, ?, ?, ?)")) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "INSERT INTO MEMBERS (MAIL, PASSWORD,NOM,PRENOM,REDUCTION) VALUES (?, ?, ?, ?, ?)")) {
                 preparedStatement.setString(1, membre.getMail());
                 preparedStatement.setString(2, membre.getPassword());
                 preparedStatement.setString(3, membre.getNom());
@@ -44,7 +45,6 @@ public class Membre {
                 preparedStatement.setString(5, membre.getReduction().getNom());
                 preparedStatement.execute();
             }
-
             con.close();
         } catch (
                 SQLException throwables) {
@@ -53,7 +53,7 @@ public class Membre {
     }
 
     public static ArrayList<Membre> listMembreMaker() {
-        ArrayList<Membre> lib = new ArrayList<Membre>();
+        ArrayList<Membre> lib = new ArrayList<>();
         ArrayList<Reduction> reducLib = listReducMaker();
         int i =0;
         try (
@@ -81,7 +81,8 @@ public class Membre {
     public static void deleteMembre(Membre membre){
         try (Connection con = DriverManager.getConnection("jdbc:h2:./default"))
         {
-            try (PreparedStatement preparedStatement = con.prepareStatement("delete from MEMBERS where MAIL='"+membre.getMail()+"'")) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(
+                    "delete from MEMBERS where MAIL='"+membre.getMail()+"'")) {
                 preparedStatement.execute();
             }
             con.close();
@@ -90,7 +91,7 @@ public class Membre {
         }
 
     }
-
+    //permet d'afficher seulement le mail d'un membre dans les combobos
     @Override
     public String toString() {
         return mail;

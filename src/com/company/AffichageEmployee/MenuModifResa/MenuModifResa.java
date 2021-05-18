@@ -1,19 +1,15 @@
 package com.company.AffichageEmployee.MenuModifResa;
 
 import com.company.AffichageEmployee.MenuEmployee;
-import com.company.ElementDeBase.Film;
 import com.company.ElementDeBase.Membre;
-import com.company.ElementDeBase.Reduction;
 import com.company.ElementDeBase.Reservation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static com.company.ElementDeBase.Membre.listMembreMaker;
 import static com.company.ElementDeBase.Reservation.deleteResa;
 import static com.company.ElementDeBase.Reservation.listResaMaker;
 
@@ -27,9 +23,8 @@ public class MenuModifResa extends JFrame{
         grid.setVgap(3);
         setLayout(grid);
 
-        for(int i=0;i<len;i++){
-            Reservation reservation=reservations.get(i);
-            JLabel label = new JLabel("  " + Integer.toString(reservation.numDeResa));
+        for(Reservation reservation:reservations){
+            JLabel label = new JLabel("  " + reservation.numDeResa);
             JPanel panelBis = new JPanel();
             GridLayout gridBis = new GridLayout(1, 2);
             gridBis.setHgap(3);
@@ -59,20 +54,16 @@ public class MenuModifResa extends JFrame{
             add(panelBis);
         }
         JButton retour=new JButton("Retour");
-        retour.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new MenuEmployee();
-            }
+        retour.addActionListener(e -> {
+            dispose();
+            new MenuEmployee();
         });
         add(retour);
 
         JButton add=new JButton("Ajouter une Réservation");
-        add.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new AddResa();
-            }
+        add.addActionListener(e -> {
+            dispose();
+            new AddResa();
         });
         add(add);
 

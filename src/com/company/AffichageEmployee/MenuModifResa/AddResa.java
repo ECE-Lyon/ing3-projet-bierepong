@@ -2,27 +2,20 @@ package com.company.AffichageEmployee.MenuModifResa;
 
 import com.company.ElementDeBase.Film;
 import com.company.ElementDeBase.Membre;
-import com.company.ElementDeBase.Reduction;
 import com.company.ElementDeBase.Reservation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.company.ElementDeBase.Film.libMaker;
 import static com.company.ElementDeBase.Membre.listMembreMaker;
-import static com.company.ElementDeBase.Reduction.listReducMaker;
 import static com.company.ElementDeBase.Reservation.listResaMaker;
 import static com.company.ElementDeBase.Reservation.sauvegarderResa;
 
 public class AddResa extends JFrame {
-
-
     protected AddResa(){
-        ArrayList<Reservation> res = listResaMaker();
+        ArrayList<Reservation> resas = listResaMaker();
         ArrayList<Film> films = libMaker();
         ArrayList<Membre> membres = listMembreMaker();
 
@@ -34,7 +27,7 @@ public class AddResa extends JFrame {
         contentPane.setLayout(grid);
 
         JLabel empty = new JLabel("");
-        JLabel numLab = new JLabel(Integer.toString(res.size()));
+        JLabel numLab = new JLabel(Integer.toString(resas.size()));
         contentPane.add(empty);contentPane.add(numLab);
 
         JLabel mailLab = new JLabel("  Adresse mail");
@@ -50,31 +43,27 @@ public class AddResa extends JFrame {
         contentPane.add(nbLab);contentPane.add(nbField);
 
         JButton annule = new JButton("Annuler");
-        annule.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new MenuModifResa();
-            }
+        annule.addActionListener(e -> {
+            dispose();
+            new MenuModifResa();
         });
 
         JButton valider = new JButton("Valider");
-        valider.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Membre membre=(Membre) membreComboBox.getSelectedItem();
-                Film film=(Film) filmsComboBox.getSelectedItem();
-                int nbTickets=Integer.parseInt(nbField.getText());
-                int numResa =res.get(0).getNumDeResa();
-                for (int i = 0;i< res.size();i++) {
-                    if (numResa < res.get(i).getNumDeResa()) {
-                        numResa = res.get(i).getNumDeResa();
-                    }
+        valider.addActionListener(e -> {
+            Membre membre=(Membre) membreComboBox.getSelectedItem();
+            Film film=(Film) filmsComboBox.getSelectedItem();
+            int nbTickets=Integer.parseInt(nbField.getText());
+            int numResa =resas.get(0).getNumDeResa();
+            for (Reservation resa : resas) {
+                if (numResa < resa.getNumDeResa()) {
+                    numResa = resa.getNumDeResa();
                 }
-                numResa++;
-                Reservation reservation=new Reservation(nbTickets,numResa,membre,film);
-                sauvegarderResa(reservation);
-                dispose();
-                new MenuModifResa();
             }
+            numResa++;
+            Reservation reservation=new Reservation(nbTickets,numResa,membre,film);
+            sauvegarderResa(reservation);
+            dispose();
+            new MenuModifResa();
         });
         contentPane.add(annule);contentPane.add(valider);
 

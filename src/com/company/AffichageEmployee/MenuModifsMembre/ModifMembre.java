@@ -5,8 +5,6 @@ import com.company.ElementDeBase.Reduction;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import static com.company.ElementDeBase.Membre.deleteMembre;
@@ -44,33 +42,28 @@ public class ModifMembre extends JFrame{
         contentPane.add(passwordLab);contentPane.add(passwordField);
 
         JLabel reducLab = new JLabel("  Réductions :");
-        JPanel student = new JPanel();
         JComboBox reducsComboBox=new JComboBox(reductions.toArray());
         reducsComboBox.setSelectedIndex(index);
         contentPane.add(reducLab);contentPane.add(reducsComboBox);
 
-        JButton annule = new JButton("Annuler");
-        annule.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new MenuModifMembre();
-            }
+        JButton annuler = new JButton("Annuler");
+        annuler.addActionListener(e -> {
+            dispose();
+            new MenuModifMembre();
         });
         JButton valider = new JButton("Valider");
-        valider.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                String prenom=prenomField.getText();
-                String nom=nomField.getText();
-                String password=passwordField.getText();
-                Reduction reduction=(Reduction) reducsComboBox.getSelectedItem();
-                Membre membre1=new Membre(membre.getMail(),password,nom,prenom,reduction);
-                deleteMembre(membre);
-                sauvegarderMembre(membre1);
-                new MenuModifMembre();
-            }
+        valider.addActionListener(e -> {
+            dispose();
+            String prenom=prenomField.getText();
+            String nom=nomField.getText();
+            String password=passwordField.getText();
+            Reduction reduction=(Reduction) reducsComboBox.getSelectedItem();
+            Membre membre1=new Membre(membre.getMail(),password,nom,prenom,reduction);
+            deleteMembre(membre);
+            sauvegarderMembre(membre1);
+            new MenuModifMembre();
         });
-        contentPane.add(annule);contentPane.add(valider);
+        contentPane.add(annuler);contentPane.add(valider);
 
         setSize(500,250);
         setVisible(true);
