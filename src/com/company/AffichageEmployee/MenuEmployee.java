@@ -15,7 +15,7 @@ public class MenuEmployee extends JFrame{
         setTitle("Menu employés");
 
         Container contentPane=this.getContentPane();
-        GridLayout grid = new GridLayout(6, 1);
+        GridLayout grid = new GridLayout(7, 1);
         grid.setVgap(3);
         contentPane.setLayout(grid);
 
@@ -39,6 +39,7 @@ public class MenuEmployee extends JFrame{
         JButton records=new JButton("Mettre à jour les données clients");
         JButton resa=new JButton("Modifier les réservations");
         JButton employee=new JButton("Modifier les employés");
+        JButton stat=new JButton("Statistiques");
 
         update.addActionListener(e -> {
             dispose();
@@ -60,10 +61,14 @@ public class MenuEmployee extends JFrame{
             dispose();
             new MenuModifEmployee();
         });
+        stat.addActionListener(e -> {
+            dispose();
+            new MenuStat();
+        });
 
         contentPane.add(panel);contentPane.add(update);contentPane.add(discounts);
-        contentPane.add(records);contentPane.add(resa);contentPane.add(employee);
-        setSize(500,300);
+        contentPane.add(records);contentPane.add(resa);contentPane.add(employee);contentPane.add(stat);
+        setSize(500,400);
         setVisible(true);
     }
 
