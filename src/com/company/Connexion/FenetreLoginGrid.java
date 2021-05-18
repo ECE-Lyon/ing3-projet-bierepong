@@ -66,9 +66,9 @@ public class FenetreLoginGrid extends JFrame {
                         String prenom = resultSet.getString("prenom");
                         String nomreduction = resultSet.getString("reduction");
                         int montantreduction =0;
-                        for (int i=0;i<reductionArrayList.size();i++){
-                            if(reductionArrayList.get(i).nom.equals(nomreduction)){
-                                montantreduction = reductionArrayList.get(i).montant;
+                        for (Reduction reduction : reductionArrayList) {
+                            if (reduction.nom.equals(nomreduction)) {
+                                montantreduction = reduction.montant;
                             }
                         }
                         Reduction RED = new Reduction(nomreduction,montantreduction);
@@ -89,7 +89,7 @@ public class FenetreLoginGrid extends JFrame {
         });
 
         ButSubmitEmploye.addActionListener(e -> {
-
+            int n=0;
             try (Connection con = DriverManager.getConnection("jdbc:h2:./default"); PreparedStatement statement = con.prepareStatement("select MAIL,PASSWORD from employee")) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while(resultSet.next()) {
@@ -98,11 +98,10 @@ public class FenetreLoginGrid extends JFrame {
                         if (ValMail.getText().equals(mail) && valMDP.getText().equals(password)) {
                             dispose();
                             new MenuEmployee();
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrects");
+                            n=1;
                         }
                     }
+                    if(n==0){JOptionPane.showMessageDialog(Buttuns, "Identifiants incorrects");}
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
