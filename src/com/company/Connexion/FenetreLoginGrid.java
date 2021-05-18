@@ -6,8 +6,11 @@ import com.company.ElementDeBase.Reduction;
 import com.company.AffichageClients.ChoixFilm;
 import com.company.Connexion.FenetreCreerCompteGrid;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class FenetreLoginGrid extends JFrame {
         JTextField ValMail,valMDP;
         JButton ButSubmit, ButCreercompte, ButSubmitEmploye,ButGuest;
 
-        Titre=new JLabel("Robert Pathé");
+        Titre=new JLabel("Bienvenue au cinéma Robert Pathé!");
         Mail=new JLabel("Mail:");
         MDP=new JLabel("MdP:");
         creercompte=new JLabel("Pas de compte?");
@@ -44,6 +47,7 @@ public class FenetreLoginGrid extends JFrame {
         JPanel Top = new JPanel();
         Top.setBackground(Color.YELLOW);
         //Top.setLayout(new GridLayout(1,1));
+        //Top.setLayout(new GridLayout(1,1));
 
         JPanel Login = new JPanel();
         Login.setLayout(new GridLayout(3,2));
@@ -54,10 +58,10 @@ public class FenetreLoginGrid extends JFrame {
 
         ArrayList<Reduction> reductionArrayList = listReducMaker();
 
+        //connexion
         ButSubmit.addActionListener(e -> {
         int n=0;
             try (Connection con = DriverManager.getConnection("jdbc:h2:./default"); PreparedStatement statement = con.prepareStatement("select * from members")) {
-                //statement.setString(1, "mail");
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while(resultSet.next()) {
                         String mail = resultSet.getString("mail");
@@ -125,8 +129,20 @@ public class FenetreLoginGrid extends JFrame {
             }
         });
 
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("Images/CINEMA.png"));
+            Image dimg = myPicture.getScaledInstance(150,100, Image.SCALE_SMOOTH);
+            JLabel image=new JLabel(new ImageIcon(dimg));
+            Top.add(image);
+        }catch (IOException throwables) {
+            throwables.printStackTrace();
+        }
 
-        Top.add(Titre);Login.add(Mail); Login.add(ValMail);Login.add(MDP);Login.add(valMDP);
+        //Login.setBackground(Color.getHSBColor(255,255,204));
+        //Buttuns.setBackground(Color.getHSBColor(173,216,230));
+        //CreerCompte.setBackground(Color.getHSBColor(213,255,255));
+        //Top.add(Titre);
+        Login.add(Mail); Login.add(ValMail);Login.add(MDP);Login.add(valMDP);
         Buttuns.add(ButSubmit);Buttuns.add(ButGuest);Buttuns.add(ButSubmitEmploye);CreerCompte.add(creercompte);CreerCompte.add(ButCreercompte);
 
         add(Top);add(Login);add(Buttuns);add(CreerCompte);

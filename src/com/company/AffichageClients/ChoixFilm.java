@@ -3,10 +3,13 @@ package com.company.AffichageClients;
 import com.company.Connexion.FenetreLoginGrid;
 import com.company.ElementDeBase.Film;
 import com.company.ElementDeBase.Membre;
+import com.company.ElementDeBase.Reduction;
 import com.company.ElementDeBase.Reservation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,8 +17,9 @@ import static com.company.ElementDeBase.Film.libMaker;
 import static com.company.ElementDeBase.Reservation.listResaMaker;
 
 public class ChoixFilm extends JFrame {
+    private Membre membre;
+
     public ChoixFilm(Membre membre) throws IOException {
-        //importe la base de donnée des films et des réservations
         ArrayList<Film> lib = libMaker();
         ArrayList<Reservation> reservationArrayList = listResaMaker();
         int nbFilm = lib.size();
@@ -41,7 +45,7 @@ public class ChoixFilm extends JFrame {
                 }
                 for (int i = 0; i < nbFilm % 5; i++) {
                     JTextArea txt = Film.TextAreaBis(lib.get(i + j * 5).title + "\n" + lib.get(i + j * 5).genre + "\n"
-                            + lib.get(i + j * 5).releaseDate + "\n" + lib.get(i + j * 5).runningTime
+                            + lib.get(i + j * 5).releaseDate + "\n" + Integer.toString(lib.get(i + j * 5).runningTime)
                             + " min");
                     add(txt);
                 }
@@ -95,23 +99,29 @@ public class ChoixFilm extends JFrame {
         }
 
         JButton acheter = new JButton("Acheter");
-        acheter.addActionListener(e -> {
-            Film film=(Film) choixFilm.getSelectedItem();
-            int nbTickets=Integer.parseInt(champ.getText());
-            int numResa =reservationArrayList.get(0).getNumDeResa();
-            for (Reservation reservation : reservationArrayList) {
-                if (numResa < reservation.getNumDeResa()) {
-                    numResa = reservation.getNumDeResa();
-                }
-            }
-            numResa++;
-
-            Reservation resa=new Reservation(nbTickets,numResa,membre,film);
-            dispose();
-            try {
-                new Confirmation(resa);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+        acheter.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Film film=(Film) choixFilm.getSelectedItem();
+                int nbTickets=Integer.parseInt(champ.getText());
+                    if(nbTickets>=1 && !(champ.getText().isEmpty()) ){
+                        int numResa =reservationArrayList.get(0).getNumDeResa();
+                        for (Reservation reservation : reservationArrayList) {
+                            if (numResa < reservation.getNumDeResa()) {
+                                numResa = reservation.getNumDeResa();
+                            }
+                        }
+                        numResa++;
+                        Reservation resa=new Reservation(nbTickets,numResa,membre,film);
+                        dispose();
+                        try {
+                            new Confirmation(resa);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(panel, "Veuillez saisir un nombre de tickets valide");
+                    }
             }
         });
 
@@ -119,13 +129,23 @@ public class ChoixFilm extends JFrame {
         JLabel blank = new JLabel("");
         add(blank);
         JButton logOut = new JButton("Log out");
-        logOut.addActionListener(e -> {
-            dispose();
-            new FenetreLoginGrid();
+        logOut.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new FenetreLoginGrid();
+            }
         });
         add(logOut);
 
         setSize(new Dimension(1040, tailleFenetre * 150));
         setVisible(true);
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        Reduction reduction = new Reduction("student", 4);
+        Membre membre = new Membre("a@g.com", "passw0rd", "Michou", "Michel",
+                reduction);
+        new ChoixFilm(membre);
     }
 }

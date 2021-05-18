@@ -18,7 +18,7 @@ public class FenetreCreerCompteGrid extends JFrame {
 
         setTitle("Création de compte");
 
-        // Déclaration des objets graphiques
+        // Declaration des objets graphiques
         JLabel Titre,Mail,MDP,ValidMDP,Nom,Prenom;
         JTextField ValMail,valMDP,valValidMDP,valNom,valPrenom;
         JButton ButSubmit, ButRetour;
@@ -30,6 +30,7 @@ public class FenetreCreerCompteGrid extends JFrame {
         MDP=new JLabel("MDP:");
         ValidMDP=new JLabel("Vérifier le mdp:");
 
+
         valNom=new JTextField("");
         valPrenom=new JTextField("");
         ValMail=new JTextField("");
@@ -39,31 +40,39 @@ public class FenetreCreerCompteGrid extends JFrame {
         ButSubmit=new JButton("Valider");
         ButRetour=new JButton("Retour");
 
-        //Paramètres du grid
-        GridLayout grid = new GridLayout(3, 3);
+        //Parametres du grid
+
+        GridLayout grid = new GridLayout(4, 3);
         grid.setHgap(10);
         setLayout(grid);
 
-        //Déclarations des panels (paramètres par defaut)
+        //Declarations des pannels (parametres par defaut sauf login)
         JPanel Top = new JPanel();
 
         JPanel Login = new JPanel();
         Login.setLayout(new GridLayout(6,2));
 
-        JPanel Buttons = new JPanel();
+        JPanel Buttuns = new JPanel();
+
+        JPanel CreerCompte = new JPanel();
 
 
         ButSubmit.addActionListener(e -> {
+            /*
+            Si les mot de passes concordent, sauvegarde le membre dans nos bases de données, et redirige le membre vers la page de selection des fils
+             */
             String nom = valNom.getText();
             String prenom = valPrenom.getText();
-            String mail =ValMail.getText();
-            String password = valMDP.getText();
-            String verifPassword = valValidMDP.getText();
-            Reduction reduction = new Reduction("Aucune",0);
+            String Mail1 =ValMail.getText();
+            String Password = valMDP.getText();
+            String verifPassord = valValidMDP.getText();
+            Reduction reduction = new Reduction("aucune",0);
 
-            Membre membre = new Membre(mail,password,nom,prenom,reduction);
+            Membre membre = new Membre(Mail1,Password,nom,prenom,reduction);
 
-            if(password.equals(verifPassword)){
+            //if(!Mail1.contains("@")){JOptionPane.showMessageDialog(Buttuns, "Adresse Mail invalide!");}
+
+            if(Password.equals(verifPassord)){
                 Sauvegarder(membre);
                 dispose();
                 try {
@@ -73,31 +82,46 @@ public class FenetreCreerCompteGrid extends JFrame {
                 }
             }
             else{
-                JOptionPane.showMessageDialog(Buttons, "Vos mots de passe doivent être identiques!");
+                JOptionPane.showMessageDialog(Buttuns, "Vos mots de passe doivent être identiques!");
             }
         });
 
-
+        //Retourne au login principal
         ButRetour.addActionListener(e -> {
             dispose();
             new FenetreLoginGrid();
         });
 
+        /*valMDP.addActionListener(new java.awt.event.ActionListener() {
+                                     public void actionPerformed(java.awt.event.ActionEvent e) {
+                                         String Mail1 =ValMail.getText();
+                                         if (!Mail1.contains("@")){                             Ce bout de code marche mais n'est pas très utile (ne marche que lorsque l'on appuie sur ENTRER)
+                                             JOptionPane.showMessageDialog(null,
+                                                     "Adresse Mail invalide!", "Error Message",
+                                                     JOptionPane.ERROR_MESSAGE);
+                                         }
+                                     }
+                                 });*/
+
+
         Top.add(Titre);
 
-        Login.add(Nom);Login.add(valNom);Login.add(Prenom);Login.add(valPrenom);Login.add(Mail);
-        Login.add(ValMail);Login.add(MDP);Login.add(valMDP);Login.add(ValidMDP);Login.add(valValidMDP);
+        Login.add(Nom);Login.add(valNom);Login.add(Prenom);Login.add(valPrenom);
+        Login.add(Mail); Login.add(ValMail);Login.add(MDP);Login.add(valMDP);Login.add(ValidMDP);Login.add(valValidMDP);
 
-        Buttons.add(ButRetour);Buttons.add(ButSubmit);
+        Buttuns.add(ButRetour);Buttuns.add(ButSubmit);
 
-        add(Top);add(Login);add(Buttons);
+        add(Top);add(Login);add(Buttuns);add(CreerCompte);
 
-        setSize(new Dimension(500,300));
+        setSize(new Dimension(500,500));
         setVisible(true);
+
     }
 
     void Sauvegarder(Membre membre) {
-
+        /*
+        Cette fonction sauvegarde un membre dans la BDD.
+         */
         try{
             Connection con = DriverManager.getConnection("jdbc:h2:./default");
 
@@ -115,9 +139,5 @@ public class FenetreCreerCompteGrid extends JFrame {
                 SQLException throwables){
             throwables.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        new FenetreCreerCompteGrid();
     }
 }
