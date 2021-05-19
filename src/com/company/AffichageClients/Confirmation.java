@@ -30,7 +30,7 @@ public class Confirmation extends JFrame {
         int tarif=resa.nbTickets*(8-resa.membre.getReduction().montant);
         JTextArea text=Film.TextAreaBis(film.title+"\n"+film.genre+"\n"+film.releaseDate+"\n"+
                 film.runningTime+" minutes\n\nnombre de tickets : "+resa.nbTickets+"\n"+"tarif : "+
-                tarif+"€ \n");
+                tarif+"€ \n"+"Num de réservation : "+resa.getNumDeResa());
         panel1.add(text);
 
         blank=new JLabel("");
@@ -60,7 +60,7 @@ public class Confirmation extends JFrame {
 
         add(panel2);
 
-        setSize(370,500);
+        setSize(600,750);
         setVisible(true);
     }
 }

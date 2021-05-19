@@ -124,8 +124,8 @@ public class ChoixFilm extends JFrame {
         });
 
         add(acheter);
-        JLabel blank = new JLabel("");
-        add(blank);
+        JLabel price = new JLabel("Prix unitaire du Ticket : "+(8-membre.getReduction().getMontant())+"€");
+        add(price);//On vous a écouté et on l'a rajouté
         JButton logOut = new JButton("Log out");
         logOut.addActionListener(e -> {
             dispose();
@@ -133,7 +133,7 @@ public class ChoixFilm extends JFrame {
         });
         add(logOut);
 
-        setSize(new Dimension(1040, tailleFenetre * 150));
+        setSize(new Dimension(1400, tailleFenetre * 150));
         setVisible(true);
     }
 }
